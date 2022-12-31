@@ -8,7 +8,7 @@ function Navbar()
         <nav className="navbar bg-primary">
 
           <h1>
-                <i class="fa-brands fa-github"></i>
+                <i className="fa-brands fa-github"></i>
                 Github Finder
           </h1>
           <ul>
