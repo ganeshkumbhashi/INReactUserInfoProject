@@ -7,20 +7,31 @@ import About from './About';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Users from './Users';
+import Search from './Search';
 
 function App()
 {
     const [users,setUsers] = useState([]);
-    useEffect(async() => {
-            const res = await axios.get('http://api.github.com/users');
-            setUsers(res.data);
-        },[])
+    //useEffect(async() => {
+    //        const res = await axios.get('http://api.github.com/users');
+   //        setUsers(res.data);
+    //    },[])
+
+    const searchName = async(text) => {
+        console.log("Invoking search api")
+        const url = `https://api.github.com/search/users?q=`+text;
+        console.log(url);
+        const res = await axios.get(url);
+        console.log(res);
+        setUsers(res.data.items)
+    }
 
     return(<>
     <Router>
         <Navbar/>
         
         <div className='container'>
+        <Search searchName={searchName} />
         <Users users={users}></Users>
             <Routes>
                 <Route exact path='/about' element={<About/>}></Route>
