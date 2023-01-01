@@ -12,6 +12,7 @@ import Search from './Search';
 function App()
 {
     const [users,setUsers] = useState([]);
+    const [showClear, setShowClear] = useState(false);
     //useEffect(async() => {
     //        const res = await axios.get('http://api.github.com/users');
    //        setUsers(res.data);
@@ -23,15 +24,27 @@ function App()
         console.log(url);
         const res = await axios.get(url);
         console.log(res);
+       
         setUsers(res.data.items)
+        if(res.data.items.length > 0)
+        {
+            setShowClear(true);
+        }
     }
+
+    const clearUsers = () =>
+    {
+        setUsers([]);
+    }
+
+
 
     return(<>
     <Router>
         <Navbar/>
         
         <div className='container'>
-        <Search searchName={searchName} />
+        <Search searchName={searchName} showClear={showClear} clearUsers={clearUsers}/>
         <Users users={users}></Users>
             <Routes>
                 <Route exact path='/about' element={<About/>}></Route>

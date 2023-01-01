@@ -9,6 +9,7 @@ function Search(props)
         console.log("text value",text);
         console.log(props);
         props.searchName(text);
+        setText('');
     }
 
     return(<>
@@ -19,6 +20,7 @@ function Search(props)
         <input type="submit" value="Search" className="btn btn-dark btn-block" />
 
     </form>
+    {props.showClear && <button type="submit" className="btn btn-light btn-block" onClick={props.clearUsers}>Clear</button>}
     
     </>);
 }
