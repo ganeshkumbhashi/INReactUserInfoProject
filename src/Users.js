@@ -1,4 +1,5 @@
 import React from "react";
+import UserItem from "./UserItem";
 
 function Users(props)
 {
@@ -8,7 +9,7 @@ function Users(props)
     <div style={userStyle}>
         {props.users.map(
             (user) => (
-                <p key={user.login}>{user.login}</p>
+               <UserItem user={user}/>
             )
 
         )}
