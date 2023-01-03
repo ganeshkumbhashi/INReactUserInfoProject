@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import RepoList from "./RepoList";
 
 function UserDetail(props)
 {
@@ -9,6 +10,7 @@ function UserDetail(props)
 
     useEffect(() => {
         props.getDetails(anything);
+        props.getRepo(anything);
     },[])
 
     return(<>
@@ -66,7 +68,8 @@ function UserDetail(props)
         <div className="badge badge-dark">Public Gists: {props.user.public_gists}</div>                    
     
     </div>    
-    </>);
+    <RepoList repos={props.repos}/>
+    </>)
 }
 
 export default UserDetail;

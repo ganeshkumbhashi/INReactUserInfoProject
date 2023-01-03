@@ -16,6 +16,8 @@ function App()
     const [users,setUsers] = useState([]);
     const [showClear, setShowClear] = useState(false);
     const [user,setUser] = useState({});
+    const [repos,setRepos] = useState([]);
+
     //useEffect(async() => {
     //        const res = await axios.get('http://api.github.com/users');
    //        setUsers(res.data);
@@ -40,6 +42,12 @@ function App()
          setUser(res.data);
     }
 
+    const getRepo = async(username) => {
+        const res = await axios.get(`https://api.github.com/users/${username}/repos?per_page=5&sort=asc`)
+        console.log("Repos ->"+res.data);
+        setRepos(res.data);
+    }
+
     const clearUsers = () =>
     {
         setUsers([]);
@@ -56,7 +64,7 @@ function App()
             <Routes>
                 <Route exact path='/'  element={<AppHome searchName={searchName} users={users} clearUsers={clearUsers}  />}/>
                 <Route exact path='/about' element={<About/>}/>
-                <Route exact path="/user/:anything" element={<UserDetail getDetails={getDetails} user={user} />}/>
+                <Route exact path="/user/:anything" element={<UserDetail getDetails={getDetails} user={user} getRepo={getRepo} repos={repos}/>}/>
             </Routes>
         </div>
     </Router>
